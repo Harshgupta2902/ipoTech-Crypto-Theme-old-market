@@ -4,6 +4,7 @@
 import React from "react";
 // import TickerTape from "../crypto/home/TickerTape";
 import NavBar from "./NavBar";
+import NavBar1 from "./NavBar1";
 
 const Header = async () => {
 
@@ -45,7 +46,9 @@ const Header = async () => {
           </button>
 
           <NavBar menuBarData={menuBarData} />
+          
         </nav>
+        <NavBar1 menuBarData={menuBarData} />
       </header>
     </div>
   );

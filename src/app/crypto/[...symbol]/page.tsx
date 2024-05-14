@@ -6,7 +6,6 @@ import MainChartWidget from "../../../components/crypto/details/MainChartWidget"
 import SymbolProfileWidget from "../../../components/crypto/details/SymbolProfileWidget"
 import FinancialsWidget from "../../../components/crypto/details/FinancialsWidget"
 import NewsWidget from "../../../components/crypto/details/NewsWidget"
-import News from "@/components/crypto/home/News";
 
 
 export default function Home() {
