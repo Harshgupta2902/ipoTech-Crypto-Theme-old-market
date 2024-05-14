@@ -2,7 +2,7 @@
 
 // import { usePathname } from "next/navigation";
 import React from "react";
-import TickerTape from "../crypto/home/TickerTape";
+// import TickerTape from "../crypto/home/TickerTape";
 import NavBar from "./NavBar";
 
 const Header = async () => {
