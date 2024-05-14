@@ -26,9 +26,7 @@ export default function CrossRates() {
 
         document.getElementsByClassName('tradingview-widget-container__widget crossRates')[0].appendChild(script);
 
-        return () => {
-            document.getElementsByClassName('tradingview-widget-container__widget crossRates')[0].removeChild(script);
-        };
+        return 
     }, []);
 
     return (

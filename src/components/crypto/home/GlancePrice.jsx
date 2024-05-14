@@ -22,7 +22,8 @@ const CoinPriceWidget = ({ symbol, containerClassName }) => {
             underLineBottomColor: "rgba(41, 98, 255, 0)",
             isTransparent: false,
             autosize: false,
-            // largeChartUrl: `/crypto/${symbol}`
+            
+            largeChartUrl: `http://localhost:3000/crypto/symbol`
         });
 
         const container = document.querySelector(`.${containerClassName}`);

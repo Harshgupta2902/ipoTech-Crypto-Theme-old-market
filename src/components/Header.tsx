@@ -9,10 +9,10 @@ import {
 
 import { usePathname } from "next/navigation";
 import React from "react";
-import TickerTape from "./crypto/TickerTape";
+import TickerTape from "./crypto/home/TickerTape";
 
 
-const menuBarData = [
+const menuBarData = [ 
   {
     title: 'File',
     items: [
