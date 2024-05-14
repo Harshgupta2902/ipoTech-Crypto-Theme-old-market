@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function LandingHero() {
+  const container = useRef();
+  const [error, setError] = useState(null);
+
     useEffect(() => {
       const script = document.createElement('script');
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
@@ -17,11 +20,17 @@ export default function LandingHero() {
         "colorTheme": "light"
       });
   
-      document.getElementsByClassName('tradingview-widget-container__widget landing-hero')[0].appendChild(script);
-  
-      return () => {
-        document.getElementsByClassName('tradingview-widget-container__widget landing-hero')[0].removeChild(script);
-      };
+      if (container.current) {
+        container.current.appendChild(script);
+    } else {
+        setError('Container element not found');
+    }
+
+    return () => {
+        if (container.current && script.parentNode) {
+            container.current.removeChild(script);
+        }
+    };
     }, []);
   
     return (
@@ -34,13 +43,9 @@ export default function LandingHero() {
             </div>
             <div className="offset-md-1 col-md-5">
               <div className="tradingview-widget-container tradingview-tecnical-analys">
-                <div className="tradingview-widget-container ">
-                  <div className="tradingview-widget-container__widget landing-hero"></div>
-                  <div className="tradingview-widget-copyright">
-                    <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-                    </a>
-                  </div>
-                </div>
+              <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
+        {/* Widget will be injected here */}
+    </div>  
               </div>
             </div>
           </div>

@@ -1,8 +1,10 @@
 
-import { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const CoinPriceWidget = ({ symbol, containerClassName }) => {
+    const container = useRef();
+    const [error, setError] = useState(null);
 
     const router = useRouter();
 
@@ -26,16 +28,23 @@ const CoinPriceWidget = ({ symbol, containerClassName }) => {
             largeChartUrl: `http://localhost:3000/crypto/symbol`
         });
 
-        const container = document.querySelector(`.${containerClassName}`);
-        container.appendChild(script);
+        if (container.current) {
+            container.current.appendChild(script);
+        } else {
+            setError('Container element not found');
+        }
 
         return () => {
-            container.removeChild(script);
+            if (container.current && script.parentNode) {
+                container.current.removeChild(script);
+            }
         };
     }, [symbol, containerClassName]);
 
     return (
-        <div className={`tradingview-widget-container ${containerClassName}`} />
+        <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
+        {/* Widget will be injected here */}
+    </div>  
     );
 };
 

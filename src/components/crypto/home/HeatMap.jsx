@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function HeatMap() {
+    const container = useRef();
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js';
@@ -24,13 +27,23 @@ export default function HeatMap() {
             "locale": "en"
         });
 
-        document.getElementsByClassName('tradingview-widget-container__widget heat-map')[0].appendChild(script);
+   if (container.current) {
+            container.current.appendChild(script);
+        } else {
+            setError('Container element not found');
+        }
 
         return () => {
-            document.getElementsByClassName('tradingview-widget-container__widget heat-map')[0].removeChild(script);
+            if (container.current && script.parentNode) {
+                container.current.removeChild(script);
+            }
         };
     }, []);
 
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
     return (
         <div className="landing-feature">
             <div className="container">
@@ -39,9 +52,9 @@ export default function HeatMap() {
                         <h2>Check latest news and key events of popular <br /> companies and cryptocurrencies</h2>
                     </div>
                     <div className="col-md-12">
-                        <div className="tradingview-widget-container heat-map">
-                            <div className="tradingview-widget-container__widget heat-map"></div>
-                        </div>
+                    <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
+            {/* Widget will be injected here */}
+        </div>
                     </div>
                 </div>
             </div>
